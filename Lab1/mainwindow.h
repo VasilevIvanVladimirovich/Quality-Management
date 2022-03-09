@@ -6,7 +6,9 @@
 #include <QDebug>
 #include <Random.cpp>
 #include <QtMath>
+#include <random>
 #include "reports.h"
+
 
 
 QT_BEGIN_NAMESPACE
@@ -23,6 +25,7 @@ public:
 
     void createTableImportance();
     void createTableSatisfaction();
+
 
 private slots:
     void on_pushButton_clicked();

@@ -13,7 +13,9 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -26,6 +28,7 @@ public:
     QTabWidget *tabWidget;
     QWidget *tab;
     QVBoxLayout *verticalLayout_2;
+    QTableWidget *tableWidget;
     QFrame *frame1;
     QHBoxLayout *horizontalLayout;
     QWidget *tab_2;
@@ -44,6 +47,12 @@ public:
         tab->setObjectName(QString::fromUtf8("tab"));
         verticalLayout_2 = new QVBoxLayout(tab);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        tableWidget = new QTableWidget(tab);
+        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setMaximumSize(QSize(16777215, 250));
+
+        verticalLayout_2->addWidget(tableWidget);
+
         frame1 = new QFrame(tab);
         frame1->setObjectName(QString::fromUtf8("frame1"));
         frame1->setMaximumSize(QSize(16777215, 16777215));

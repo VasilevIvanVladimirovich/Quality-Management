@@ -22,6 +22,7 @@ public:
     void setTable(QTableWidget* tableImportance,QTableWidget* tableSatisfaction);
     void replot();
     void setResponCriter(int Respon, int Criter);
+    void createRezult();
 
 private:
     Ui::Reports *ui;
