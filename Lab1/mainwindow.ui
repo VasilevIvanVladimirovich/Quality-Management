@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>639</width>
-    <height>365</height>
+    <width>1295</width>
+    <height>710</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,24 +16,88 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Важность</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QTableWidget" name="tableWidgetImportance"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Удовлетворённость</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QTableWidget" name="tableWidgetSatisfaction"/>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Важность</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableWidgetImportance">
+          <column>
+           <property name="text">
+            <string>Цена</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Память</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Камера</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Дисплей</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Микрофон</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Удовлетворённость</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableWidgetSatisfaction">
+          <column>
+           <property name="text">
+            <string>Цена</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Память</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Камера</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Дисплей</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Микрофон</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </item>
     <item>
      <layout class="QFormLayout" name="formLayout">
@@ -47,19 +111,9 @@
       <item row="0" column="1">
        <widget class="QSpinBox" name="spinBoxRespondent">
         <property name="maximum">
-         <number>9999</number>
+         <number>999999999</number>
         </property>
        </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="labelCriteria">
-        <property name="text">
-         <string>Кол-во критериев</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSpinBox" name="spinBoxCriteria"/>
       </item>
      </layout>
     </item>
@@ -88,8 +142,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>639</width>
-     <height>21</height>
+     <width>1295</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>

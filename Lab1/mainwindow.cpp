@@ -16,23 +16,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::createTableImportance()
 {
-    ui->tableWidgetImportance->clear();
     ui->tableWidgetImportance->setRowCount(0);
-    ui->tableWidgetImportance->setColumnCount(0);
     Respon = ui->spinBoxRespondent->value();
-    Criter = ui->spinBoxCriteria->value();
     ui->tableWidgetImportance->setRowCount(Respon);
-    ui->tableWidgetImportance->setColumnCount(Criter);
 
     int *objectively = new int [Criter];
     for(int i = 0; i < Criter;i++)
     {
         objectively[i] = Random::get(1,10);
-    }
-    QStringList name_row;
-    for(int i = 1; i <= Criter;i++)
-    {
-        name_row << "К " + QString::number(i);
     }
     QStringList name_col;
     for(int i = 1; i <= Respon;i++)
@@ -58,20 +49,14 @@ void MainWindow::createTableImportance()
            ui->tableWidgetImportance->setItem(x,y,newItem);
        }
     }
-    ui->tableWidgetImportance->setHorizontalHeaderLabels(name_row);
     ui->tableWidgetImportance->setVerticalHeaderLabels(name_col);
 }
 
 void MainWindow::createTableSatisfaction()
 {
-
-    ui->tableWidgetSatisfaction->clear();
     ui->tableWidgetSatisfaction->setRowCount(0);
-    ui->tableWidgetSatisfaction->setColumnCount(0);
     Respon = ui->spinBoxRespondent->value();
-    Criter = ui->spinBoxCriteria->value();
     ui->tableWidgetSatisfaction->setRowCount(Respon);
-    ui->tableWidgetSatisfaction->setColumnCount(Criter);
 
     int *objectively = new int [Criter];
     for(int i = 0; i < Criter;i++)
@@ -79,11 +64,6 @@ void MainWindow::createTableSatisfaction()
         objectively[i] = Random::get(1,10);
     }
 
-    QStringList name_row;
-    for(int i = 1; i <= Criter;i++)
-    {
-        name_row << "К " + QString::number(i);
-    }
     QStringList name_col;
     for(int i = 1; i <= Respon;i++)
     {
@@ -108,8 +88,6 @@ void MainWindow::createTableSatisfaction()
            ui->tableWidgetSatisfaction->setItem(x,y,newItem);
        }
     }
-
-    ui->tableWidgetSatisfaction->setHorizontalHeaderLabels(name_row);
     ui->tableWidgetSatisfaction->setVerticalHeaderLabels(name_col);
 }
 

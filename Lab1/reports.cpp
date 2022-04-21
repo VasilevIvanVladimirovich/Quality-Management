@@ -6,7 +6,6 @@ Reports::Reports(QWidget *parent) :
     ui(new Ui::Reports)
 {
     ui->setupUi(this);
-    resize(1280,850);
 }
 
 Reports::~Reports()
@@ -19,6 +18,8 @@ void Reports::setTable(QTableWidget* tableImportance,QTableWidget* tableSatisfac
     tableImportance_ = tableImportance;
     tableSatisfaction_ = tableSatisfaction;
 }
+// Рекомендации
+// если расхождения в пределах погрешности...
 
 void Reports::replot()
 {
@@ -42,7 +43,7 @@ void Reports::replot()
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Bar Chart");
+    chart->setTitle("Диаграмма расхождений");
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QBarCategoryAxis *axis = new QBarCategoryAxis();
@@ -54,25 +55,143 @@ void Reports::replot()
     QChartView *chartView = new QChartView(chart);
     chartView->setParent(ui->frame1);
 
-    //Точки
-    QScatterSeries *series0 = new QScatterSeries();
-    series0->setName("Важность/Удовлетворённость");
-    series0->setMarkerShape(QScatterSeries::MarkerShapeCircle);
-    series0->setMarkerSize(15.0);
+    //Таблица разницы
+    ui->tableDiscrepancy->clear();
+    ui->tableDiscrepancy->setRowCount(Criter_);
+    ui->tableDiscrepancy->setColumnCount(1);
+    ui->tableDiscrepancy->setColumnWidth(0,500);
+    ui->tableDiscrepancy->setVerticalHeaderLabels(categories);
 
-    QLineSeries* series1 = new QLineSeries();
-    *series1 << QPointF(5, 0) << QPointF(5, 10);
-    QLineSeries* series2 = new QLineSeries();
-    *series2 << QPointF(0, 5) << QPointF(10, 5);
-
-    for(int i = 0;i < Criter_;i++)
+    QTableWidgetItem *newItem = new QTableWidgetItem();
+    QString line="";
+    for(int i =0;i < Criter_;i++)
     {
-        *series0 <<QPointF(ui->tableWidget->item(1,i)->text().toDouble(),
-                           ui->tableWidget->item(0,i)->text().toDouble());
+        if((set0->at(i)>set1->at(i)-0.5 & set0->at(i)<set1->at(i)+0.5)|
+           (set1->at(i)>set0->at(i)-0.5 & set1->at(i)<set0->at(i)+0.5))
+            line= "критерий является стабильным местом в работе предприятия";
+        else if(set0->at(i) > set1->at(i))
+            line= "критерий является слабым местом в работе предприятия";
+        else if(set0->at(i) < set1->at(i))
+            line= "критерий является сильной стороной работы предприятия";
+        newItem = new QTableWidgetItem(line);
+        ui->tableDiscrepancy->setItem(i,0,newItem);
     }
+
+    //гистограмма важности
+    QBarSeries *seriestImpot  = new QBarSeries();
+    seriestImpot->append(set0);
+
+    QChart *chartImpot = new QChart();
+    chartImpot->addSeries(seriestImpot);
+    chartImpot->setTitle("Диаграмма важности");
+    chartImpot->setAnimationOptions(QChart::SeriesAnimations);
+
+    QBarCategoryAxis *axisImpot = new QBarCategoryAxis();
+    axisImpot->append(categories);
+    chartImpot->createDefaultAxes();
+    chartImpot->axisY()->setRange(0,10);
+    chartImpot->setAxisX(axisImpot,seriestImpot);
+    QChartView *chartViewImpot = new QChartView(chartImpot);
+    chartViewImpot->setParent(ui->frameImpotant);
+
+    //Таблица важности
+    ui->tableImpotant->clear();
+    ui->tableImpotant->setRowCount(Criter_);
+    ui->tableImpotant->setColumnCount(1);
+    ui->tableImpotant->setVerticalHeaderLabels(categories);
+    ui->tableImpotant->setColumnWidth(0,500);
+
+    line="";
+    for(int i =0;i < Criter_;i++)
+    {
+        if(set0->at(i) > 8)
+            line = "Высокая заинтересованность потребителей";
+        else if(set0->at(i) < 5)
+            line = "Низкая заинтересованность потребителей";
+        else line = "Заинтересованность";
+
+        newItem = new QTableWidgetItem(line);
+        ui->tableImpotant->setItem(i,0,newItem);
+    }
+
+    //гистограмма удовлетворённости
+    QBarSeries *seriestSatis  = new QBarSeries();
+    seriestSatis->append(set1);
+
+    QChart *chartSatis = new QChart();
+    chartSatis->addSeries(seriestSatis);
+    chartSatis->setTitle("Диаграмма удовлетворённости");
+    chartSatis->setAnimationOptions(QChart::SeriesAnimations);
+
+    QBarCategoryAxis *axisSatis = new QBarCategoryAxis();
+    axisSatis->append(categories);
+    chartSatis->createDefaultAxes();
+    chartSatis->axisY()->setRange(0,10);
+    chartSatis->setAxisX(axisSatis,seriestSatis);
+    QChartView *chartViewSatis = new QChartView(chartSatis);
+    chartViewSatis->setParent(ui->frameSatisfaction);
+
+    //Таблица удовлетворённости
+    ui->tableSatisfaction->clear();
+    ui->tableSatisfaction->setRowCount(Criter_);
+    ui->tableSatisfaction->setColumnCount(1);
+    ui->tableSatisfaction->setVerticalHeaderLabels(categories);
+    ui->tableSatisfaction->setColumnWidth(0,500);
+
+    line="";
+    for(int i =0;i < Criter_;i++)
+    {
+        if(set1->at(i) > 8)
+            line = "Высокая удовлетворенность потребителей";
+        else if(set1->at(i) < 5)
+            line = "Низкая удовлетворенность потребителей";
+        else line = "Удовлетворенность";
+
+        newItem = new QTableWidgetItem(line);
+        ui->tableSatisfaction->setItem(i,0,newItem);
+    }
+
+    //Точки
+
+    QVector<QScatterSeries*> vactorScatter;
+    for(int i=0; i < Criter_; i++)
+    {
+        QScatterSeries *seriesScatter = new QScatterSeries();
+        seriesScatter->setName(categories[i]);
+        seriesScatter->setMarkerShape(QScatterSeries::MarkerShapeCircle);
+        seriesScatter->setMarkerSize(15.0);
+        *seriesScatter<<QPointF(ui->tableWidget->item(1,i)->text().toDouble(),
+                        ui->tableWidget->item(0,i)->text().toDouble());
+        vactorScatter.push_back(seriesScatter);
+    }
+
+    double sredImportance,sredSatisfaction;
+    double sum=0;
+    for(int i = 0;i<Criter_;i++)
+    {
+        sum+=ui->tableWidget->item(1,i)->text().toDouble();
+    }
+    sredImportance=sum/Criter_;
+    QLineSeries* series1 = new QLineSeries();
+    *series1 << QPointF(sredImportance, 0) << QPointF(sredImportance, 10);
+    series1->setColor(QColor(0,0,0));
+
+    sum=0;
+    for(int i = 0;i<Criter_;i++)
+    {
+        sum+=ui->tableWidget->item(0,i)->text().toDouble();
+    }
+    sredSatisfaction=sum/Criter_;
+    QLineSeries* series2 = new QLineSeries();
+    *series2 << QPointF(0, sredSatisfaction) << QPointF(10, sredSatisfaction);
+    series2->setColor(QColor(0,0,0));
+
     //важность x
     QChart *chart2 = new QChart();
-    chart2->addSeries(series0);
+    for(int i = 0; i < Criter_;i++)
+    {
+        chart2->addSeries(vactorScatter[i]);
+    }
     chart2->addSeries(series1);
     chart2->addSeries(series2);
     chart2->setTitle("Соотношение важность/удовлетворенность");
@@ -85,6 +204,29 @@ void Reports::replot()
 
     QChartView *chartView2 = new QChartView(chart2);
     chartView2->setParent(ui->frame2);
+
+    //таблица точек
+    ui->tablePoint->clear();
+    ui->tablePoint->setRowCount(Criter_);
+    ui->tablePoint->setColumnCount(1);
+    ui->tablePoint->setColumnWidth(0,500);
+    ui->tablePoint->setVerticalHeaderLabels(categories);
+
+    for(int i =0;i < Criter_;i++)
+    {
+
+        if(set0->at(i)>=sredImportance & set1->at(i)>=sredSatisfaction)
+            line="Критерий важен и потребитель удовлетворен";
+        else if(set0->at(i) <= sredImportance & set1->at(i) >= sredSatisfaction)
+            line="Критерий не важен, но потребитель удовлетворен";
+        else if(set0->at(i) >= sredImportance & set1->at(i) <= sredSatisfaction)
+            line="Критерий важен, но потребитель не удовлетворен";
+        else if(set0->at(i) <= sredImportance & set1->at(i) <= sredSatisfaction)
+            line="Критерий не важен и потребитель не удовлетворен";
+
+        newItem = new QTableWidgetItem(line);
+        ui->tablePoint->setItem(i,0,newItem);
+    }
 }
 
 void Reports::setResponCriter(int Respon, int Criter)
@@ -215,9 +357,33 @@ void Reports::createRezult()
         newItem = new QTableWidgetItem(QString::number(O, 'f', 2));
         ui->tableWidget->setItem(6,y,newItem);
     }
-
-    ui->label->setText("Удовлетворённость потребителя: " + QString::number(qCeil(summ/10*100))+"%");
+    QString line="";
+    double satisfaction;
+    satisfaction = summ/10*100;
+    if(satisfaction >= 90)
+        line = "потребители удовлетворены";
+    else if(satisfaction < 90 & satisfaction > 70)
+        line = "потребители удовлетворены, но имеются небольшие замечания";
+    else if(satisfaction <=70 & satisfaction >= 50)
+        line = "удовлетворенность потребителей низкая";
+    else
+        line = "потребители неудовлетворены";
+    ui->label->setText("Удовлетворённость потребителя: " + QString::number(qCeil(summ/10*100))+"%" + " " + line);
     ui->tableWidget->setHorizontalHeaderLabels(name_col);
     ui->tableWidget->setVerticalHeaderLabels(name_row);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     replot();
 }

@@ -31,15 +31,16 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout_2;
     QLabel *label;
     QTableWidget *tableWidgetImportance;
+    QVBoxLayout *verticalLayout_4;
     QLabel *label_2;
     QTableWidget *tableWidgetSatisfaction;
     QFormLayout *formLayout;
     QLabel *labelRespondent;
     QSpinBox *spinBoxRespondent;
-    QLabel *labelCriteria;
-    QSpinBox *spinBoxCriteria;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
@@ -50,30 +51,69 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(639, 365);
+        MainWindow->resize(1295, 710);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
 
-        verticalLayout->addWidget(label);
+        verticalLayout_2->addWidget(label);
 
         tableWidgetImportance = new QTableWidget(centralwidget);
+        if (tableWidgetImportance->columnCount() < 5)
+            tableWidgetImportance->setColumnCount(5);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidgetImportance->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidgetImportance->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidgetImportance->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        tableWidgetImportance->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        tableWidgetImportance->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         tableWidgetImportance->setObjectName(QString::fromUtf8("tableWidgetImportance"));
 
-        verticalLayout->addWidget(tableWidgetImportance);
+        verticalLayout_2->addWidget(tableWidgetImportance);
 
+
+        horizontalLayout->addLayout(verticalLayout_2);
+
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        verticalLayout->addWidget(label_2);
+        verticalLayout_4->addWidget(label_2);
 
         tableWidgetSatisfaction = new QTableWidget(centralwidget);
+        if (tableWidgetSatisfaction->columnCount() < 5)
+            tableWidgetSatisfaction->setColumnCount(5);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        tableWidgetSatisfaction->setHorizontalHeaderItem(0, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        tableWidgetSatisfaction->setHorizontalHeaderItem(1, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        tableWidgetSatisfaction->setHorizontalHeaderItem(2, __qtablewidgetitem7);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        tableWidgetSatisfaction->setHorizontalHeaderItem(3, __qtablewidgetitem8);
+        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
+        tableWidgetSatisfaction->setHorizontalHeaderItem(4, __qtablewidgetitem9);
         tableWidgetSatisfaction->setObjectName(QString::fromUtf8("tableWidgetSatisfaction"));
 
-        verticalLayout->addWidget(tableWidgetSatisfaction);
+        verticalLayout_4->addWidget(tableWidgetSatisfaction);
+
+
+        horizontalLayout->addLayout(verticalLayout_4);
+
+
+        verticalLayout->addLayout(horizontalLayout);
 
         formLayout = new QFormLayout();
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
@@ -84,19 +124,9 @@ public:
 
         spinBoxRespondent = new QSpinBox(centralwidget);
         spinBoxRespondent->setObjectName(QString::fromUtf8("spinBoxRespondent"));
-        spinBoxRespondent->setMaximum(9999);
+        spinBoxRespondent->setMaximum(999999999);
 
         formLayout->setWidget(0, QFormLayout::FieldRole, spinBoxRespondent);
-
-        labelCriteria = new QLabel(centralwidget);
-        labelCriteria->setObjectName(QString::fromUtf8("labelCriteria"));
-
-        formLayout->setWidget(1, QFormLayout::LabelRole, labelCriteria);
-
-        spinBoxCriteria = new QSpinBox(centralwidget);
-        spinBoxCriteria->setObjectName(QString::fromUtf8("spinBoxCriteria"));
-
-        formLayout->setWidget(1, QFormLayout::FieldRole, spinBoxCriteria);
 
 
         verticalLayout->addLayout(formLayout);
@@ -119,7 +149,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 639, 21));
+        menubar->setGeometry(QRect(0, 0, 1295, 25));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -134,9 +164,28 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "\320\222\320\260\320\266\320\275\320\276\321\201\321\202\321\214", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = tableWidgetImportance->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "\320\246\320\265\320\275\320\260", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidgetImportance->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QCoreApplication::translate("MainWindow", "\320\237\320\260\320\274\321\217\321\202\321\214", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidgetImportance->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\320\274\320\265\321\200\320\260", nullptr));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidgetImportance->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QCoreApplication::translate("MainWindow", "\320\224\320\270\321\201\320\277\320\273\320\265\320\271", nullptr));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidgetImportance->horizontalHeaderItem(4);
+        ___qtablewidgetitem4->setText(QCoreApplication::translate("MainWindow", "\320\234\320\270\320\272\321\200\320\276\321\204\320\276\320\275", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "\320\243\320\264\320\276\320\262\320\273\320\265\321\202\320\262\320\276\321\200\321\221\320\275\320\275\320\276\321\201\321\202\321\214", nullptr));
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidgetSatisfaction->horizontalHeaderItem(0);
+        ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindow", "\320\246\320\265\320\275\320\260", nullptr));
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidgetSatisfaction->horizontalHeaderItem(1);
+        ___qtablewidgetitem6->setText(QCoreApplication::translate("MainWindow", "\320\237\320\260\320\274\321\217\321\202\321\214", nullptr));
+        QTableWidgetItem *___qtablewidgetitem7 = tableWidgetSatisfaction->horizontalHeaderItem(2);
+        ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\320\274\320\265\321\200\320\260", nullptr));
+        QTableWidgetItem *___qtablewidgetitem8 = tableWidgetSatisfaction->horizontalHeaderItem(3);
+        ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "\320\224\320\270\321\201\320\277\320\273\320\265\320\271", nullptr));
+        QTableWidgetItem *___qtablewidgetitem9 = tableWidgetSatisfaction->horizontalHeaderItem(4);
+        ___qtablewidgetitem9->setText(QCoreApplication::translate("MainWindow", "\320\234\320\270\320\272\321\200\320\276\321\204\320\276\320\275", nullptr));
         labelRespondent->setText(QCoreApplication::translate("MainWindow", "\320\232\320\276\320\273-\320\262\320\276 \321\200\320\265\321\201\320\277\320\276\320\275\320\264\320\265\321\202\320\276\320\262", nullptr));
-        labelCriteria->setText(QCoreApplication::translate("MainWindow", "\320\232\320\276\320\273-\320\262\320\276 \320\272\321\200\320\270\321\202\320\265\321\200\320\270\320\265\320\262", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "\320\241\321\204\320\276\321\200\320\274\320\270\321\200\320\276\320\262\320\260\321\202\321\214 \321\202\320\260\320\261\320\273\320\270\321\206\321\203", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\321\207\321\221\321\202", nullptr));
     } // retranslateUi

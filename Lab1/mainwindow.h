@@ -36,6 +36,6 @@ private:
     Ui::MainWindow *ui;
 
     int Respon;
-    int Criter;
+    int Criter = 5;
 };
 #endif // MAINWINDOW_H
