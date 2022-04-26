@@ -6,6 +6,6 @@ Lab1 - Оценка удовлетворённости потребителя
 
 ![image](https://user-images.githubusercontent.com/65816571/165304076-f7e138de-92ac-4dbd-8091-831d5f7747d8.png)
 
-![image](https://user-images.githubusercontent.com/65816571/165304199-a4ded600-e7cb-4017-99ca-992b5c0037b1.png)
+Lab2 - Воронка и мишень
 
-
+![image](https://user-images.githubusercontent.com/65816571/165304550-51759f43-23fd-45b7-9517-73c95777b311.png)
